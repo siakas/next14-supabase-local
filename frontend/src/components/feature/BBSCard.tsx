@@ -7,21 +7,24 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card"
+import type { BBSData } from "@/types/types"
 
-const BBSCard = () => {
+type Props = {
+  bbsData: BBSData
+}
+
+const BBSCard = ({ bbsData }: Props) => {
+  const { id, title, content, username } = bbsData
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{username}</CardDescription>
       </CardHeader>
-      <CardContent>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, adipisci
-        suscipit labore rem itaque unde asperiores laborum delectus eaque
-        blanditiis. Ab id, qui non nisi accusamus quis natus rem commodi.
-      </CardContent>
+      <CardContent>{content}</CardContent>
       <CardFooter className="flex justify-between">
-        <Link href="/bbs-posts/1" className="text-blue-500">
+        <Link href={`/bbs-posts/${id}`} className="text-blue-500">
           Read more
         </Link>
       </CardFooter>
