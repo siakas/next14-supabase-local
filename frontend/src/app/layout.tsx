@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from '@/components/layouts/header/Header'
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import Header from "@/components/layouts/header/Header"
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'BBS with Next.js 14',
-  description: 'bbs with next.js 14',
+  title: "BBS with Next.js 14",
+  description: "BBS with Next.js 14",
 }
 
 export default function RootLayout({
