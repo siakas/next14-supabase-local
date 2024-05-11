@@ -24,7 +24,7 @@ const PostCard = ({ post }: Props) => {
       </CardHeader>
       <CardContent>{content}</CardContent>
       <CardFooter className="flex justify-between">
-        <Link href={`/bbs-posts/${id}`} className="text-blue-500">
+        <Link href={`/post/${id}`} className="text-blue-500">
           Read more
         </Link>
       </CardFooter>
