@@ -24,7 +24,7 @@ const Header = () => {
               About
             </Link>
             <Link
-              href="/bbs-post/create"
+              href="/post/create"
               className="rounded-md bg-black px-4 py-3 font-medium text-white"
             >
               Create Post
