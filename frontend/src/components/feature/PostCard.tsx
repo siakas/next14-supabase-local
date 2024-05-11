@@ -7,14 +7,14 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card"
-import type { BBSData } from "@/types/types"
+import type { Post } from "@/types/types"
 
 type Props = {
-  bbsData: BBSData
+  post: Post
 }
 
-const BBSCard = ({ bbsData }: Props) => {
-  const { id, title, content, username } = bbsData
+const PostCard = ({ post }: Props) => {
+  const { id, title, content, username } = post
 
   return (
     <Card>
@@ -32,4 +32,4 @@ const BBSCard = ({ bbsData }: Props) => {
   )
 }
 
-export default BBSCard
+export default PostCard

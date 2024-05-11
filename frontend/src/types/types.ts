@@ -1,4 +1,4 @@
-export type BBSData = {
+export type Post = {
   id: number
   username: string
   title: string
