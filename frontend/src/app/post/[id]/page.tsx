@@ -1,14 +1,5 @@
 import Link from "next/link"
-import type { Post } from "@/types/types"
-
-const fetchPostById = async (id: number) => {
-  const res = await fetch(`http://localhost:3000/api/post/${id}`, {
-    cache: "no-store",
-  })
-  const post: Post = await res.json()
-
-  return post
-}
+import { fetchPostById } from "@/lib/postHandlers"
 
 const PostByIdPage = async ({ params }: { params: { id: number } }) => {
   const post = await fetchPostById(params.id)

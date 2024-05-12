@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -15,27 +16,30 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { formSchema } from "@/lib/formSchema"
+import type { Post } from "@/types/types"
 import type { z } from "zod"
 
-const PostCreatePage = () => {
+type Props = {
+  post: Post
+}
+
+const EditPost = ({ post }: Props) => {
   const router = useRouter()
 
-  // 1. フォームの型定義
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      title: "",
-      content: "",
+      username: post.username,
+      title: post.title,
+      content: post.content,
     },
   })
 
-  // 2. submit 時の処理
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { username, title, content } = values
 
     try {
-      await fetch("http://localhost:3000/api/post/create", {
+      await fetch(`http://localhost:3000/api/post/edit/${post.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +47,7 @@ const PostCreatePage = () => {
         body: JSON.stringify({ username, title, content }),
       })
       router.push("/")
-      router.refresh() // リフレッシュすることでホーム遷移時に最新のデータが反映される
+      router.refresh()
     } catch (error) {
       console.error(error)
     }
@@ -62,7 +66,7 @@ const PostCreatePage = () => {
             <FormItem>
               <FormLabel>ユーザー名</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,7 +79,7 @@ const PostCreatePage = () => {
             <FormItem>
               <FormLabel>タイトル</FormLabel>
               <FormControl>
-                <Input placeholder="Lorem ipsum" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -94,10 +98,15 @@ const PostCreatePage = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">記事を投稿する</Button>
+        <div className="flex items-center gap-2">
+          <Button asChild variant="outline">
+            <Link href="/">キャンセル</Link>
+          </Button>
+          <Button type="submit">記事を更新する</Button>
+        </div>
       </form>
     </Form>
   )
 }
 
-export default PostCreatePage
+export default EditPost
