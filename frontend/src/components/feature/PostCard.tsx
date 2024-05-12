@@ -1,4 +1,6 @@
 import Link from "next/link"
+import DeleteButton from "@/components/feature/DeleteButton"
+import EditButton from "@/components/feature/EditButton"
 import {
   Card,
   CardHeader,
@@ -27,6 +29,10 @@ const PostCard = ({ post }: Props) => {
         <Link href={`/post/${id}`} className="text-blue-500">
           Read more
         </Link>
+        <div className="flex items-center gap-2">
+          <EditButton id={id} />
+          <DeleteButton id={id} />
+        </div>
       </CardFooter>
     </Card>
   )

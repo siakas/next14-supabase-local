@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   FormField,
@@ -15,22 +14,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-
-// フォームのスキーマを zod で定義
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "ユーザー名は2文字以上で入力してください",
-  }),
-  title: z.string().min(2, {
-    message: "タイトルは2文字以上で入力してください",
-  }),
-  content: z
-    .string()
-    .min(10, {
-      message: "本文は10文字以上で入力してください",
-    })
-    .max(140, { message: "本文は140文字以内で入力してください" }),
-})
+import { formSchema } from "@/lib/formSchema"
+import type { z } from "zod"
 
 const PostCreatePage = () => {
   const router = useRouter()
@@ -50,7 +35,7 @@ const PostCreatePage = () => {
     const { username, title, content } = values
 
     try {
-      await fetch("http://localhost:3000/api/post", {
+      await fetch("http://localhost:3000/api/post/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
